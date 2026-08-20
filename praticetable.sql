@@ -46,5 +46,25 @@ INSERT INTO emp VALUES ('7934','MILLER','CLERK','7782','1982-01-23','1300.00',NU
 select * from emp;
 
 select job   from emp  group by emp  having max(sal);
-select ename ,job ,sal from emp where (job , sal) in (
-              select job , max(sal) from emp group by job);
+select ename ,job ,sal from emp where (job , sal) in (select job , max(sal) from emp group by job);
+
+select * from emp where deptno  = (select deptno from dept where loc = "DALLAS");
+select ename,dname from emp as d1 inner join dept as d2 on d1.deptno = d2.deptno;
+select e.ename,(select d.dname from dept d where d.deptno=e.deptno) as department from emp e ;
+select e.ename, d.dname from emp as e inner join dept as d on e.deptno = d.deptno;
+select * from emp as e left join dept as d on e.deptno = d.deptno union
+select * from emp as e right join dept as d on e.deptno = d.deptno;
+
+
+select * from emp;
+-- 20-08-2026
+
+create view  result as select sal from emp;
+select * from result;
+
+select ename,sal from emp where sal < (select max(sal) from emp ) order by sal desc limit 0,1;
+
+select ename, sal  from emp as e1 where 1 = (select distinct count(sal) from emp as e2 where e2.sal > e1.sal) ;
+select ename ,mgr,job,d1.deptno from emp as e1 inner join dept as d1 on e1.deptno = d1.deptno WHERE (select count(job) from emp where job ='SALESMAN') > 1; 
+
+
