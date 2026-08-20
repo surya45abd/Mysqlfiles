@@ -179,7 +179,4 @@ select min(Salary) from empvalues where Age = 25;
 
 -- GROUP BY 
 select Department ,count(*) from empvalues group by Department;
-SELECT Department, AVG(Salary) AS average_salary
-FROM empvalues
-GROUP BY Department
-HAVING AVG(Salary) > 2000;
+SELECT Department, AVG(Salary) AS average_salary  FROM empvalues GROUP BY Department HAVING AVG(Salary) > 2000;
